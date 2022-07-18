@@ -1,54 +1,37 @@
 import axios from "axios";
-import { useState, useEffect, useReducer } from "react";
+import { useState, useEffect, useReducer, useContext } from "react";
 import { svgs } from "../../assets/img/svgs";
-import { INITIAL_LOAD, SET_SEARCH_LOCATION } from "../../context/dispatchTypes";
-import State from "../../context/State";
-import stateReducer from "../../context/stateReducer";
+import { dispatchTypes, InitialState, reducer } from "../../context/State";
+import getCurrent from "../../helpers/getCurrent";
 
-function SearchBar() {
+function SearchBar({ state, dispatch }) {
 
-   const [state, dispatch] = useReducer(stateReducer, State);
 
    const [tempSearchCity, setTempSearchCity] = useState('')
 
-// useEffect(()=> {
-//    console.log('consoling: state in search :::', state )
-// }, [state])
+   // GET CURRENT 
 
-   // GET INITIAL LOCATION
-
-   useEffect(() => {
-      axios.get('https://ipapi.co/json').then((res) => {
-         console.log('res ::: ', res)
-         dispatch({
-            type: INITIAL_LOAD, payload: {
-               city: res.data.city,
-               lat: res.data.latitude,
-               lng: res.data.longitude
-            }
-         })
-      });
-   }, []);
-
-   const handleSearchTrigger = e => {
-      if (e.key === 'Enter') {
-         dispatch({ type: SET_SEARCH_LOCATION, payload: tempSearchCity })
-      }
+   const callCurrent = () => {
+      getCurrent({ state, dispatch, place: tempSearchCity })
    }
+
+   // useEffect(() => {
+   //    console.log('consoling: tempSearchCity :::', tempSearchCity)
+   // }, [tempSearchCity])
 
    return (
       <div className='search-input-wrapper'>
          <div className='search-input'>
             <input
                type='text'
-
+               value={tempSearchCity}
                placeholder={tempSearchCity || 'please choose a city'}
-               onChange={(e) => setTempSearchCity(e.target.value)}
-               onKeyPress={e => handleSearchTrigger(e)}
+               onChange={e => setTempSearchCity(e.target.value)}
+               onKeyPress={e => (e.key === 'Enter' && tempSearchCity) && callCurrent()}
             />
-            {/* <div className='search-btn' onClick={(e) => handleLocationSet(e)}>
+            <div className='search-btn' value={tempSearchCity} onClick={callCurrent}>
                {svgs.arrowRight}
-            </div> */}
+            </div>
          </div>
       </div>
    )

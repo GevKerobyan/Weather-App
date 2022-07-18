@@ -1,56 +1,53 @@
-import axios from "axios"
-import { useReducer, useState } from "react"
-import State from "../../context/State";
-import stateReducer from "../../context/stateReducer";
 
-const InfoSection = ({ APIKey, data, location }) => {
-	const [state, dispatch] = useReducer(stateReducer, State);
+const InfoSection = ({ state, dispatch }) => {
 
-
-
-   // const url = `http://api.weatherapi.com/v1/current.json?key=${process.env.REACT_APP_APIKey}&q=Paris&aqi=no`;
-	// const header = {
-	// 	key: APIKey,
-	// };
-	// const searchLocation = (event) => {
-	// 	if (event.key === 'Enter') {
-	// 		axios.get(url).then((response) => {
-	// 			setData(response.data);
-	// 			console.log(response.data);
-	// 		});
-	// 		setLocation('');
-	// 	}
-	// };
+   const { location, weatherData } = state;
+   let system = 'c'
+   if (state.dataType === 'imperial') {
+      system = 'f'
+   }
 
    return (
       <div>
          <div className="infoContainer">
             <div className="top">
                <div className="location">
-                  <p>{state.currentCity?.name}</p>
+                  <h1>{location.name}</h1>
+                  <img src={weatherData.condition?.icon}></img>
                </div>
-               <div className="temp">
-                  {/* {data.main ? <h1>{data.main.temp.toFixed()}°F</h1> : null} */}
+               <div className="weatherInfo">
+                  <div className="temperature">
+                     <span>Temperature</span>
+                     {state.dataType ?
+                        <h2>{weatherData.temp_c}{'\u00b0'}</h2>
+                        : <h2>{weatherData.temp_f}{'\u00b0'}</h2>
+                     }
+                  </div>
+                  <div className="visibility">
+                     <span>Visibility</span>
+                     {state.dataType ?
+                        <h2>{weatherData.vis_km} <span style={{fontSize: '20px'}}>km</span></h2>
+                        : <h2>{weatherData.vis_miles}<span style={{fontSize: '20px'}}>ml</span></h2>
+                     }
+                  </div>
                </div>
-               <div className="description">
-                  {/* {data.weather ? <p>{data.weather[0].main}</p> : null} */}
-               </div>
+
             </div>
 
-               <div className="bottom">
-                  <div className="feels">
-                     {data?.main ? <p className='bold'>{data.main.feels_like.toFixed()}°F</p> : null}
-                     <p>Feels Like</p>
-                  </div>
-                  <div className="humidity">
-                     {data?.main ? <p className='bold'>{data.main.humidity}%</p> : null}
-                     <p>Humidity</p>
-                  </div>
-                  <div className="wind">
-                     {data?.wind ? <p className='bold'>{data.wind.speed.toFixed()} MPH</p> : null}
-                     <p>Wind Speed</p>
-                  </div>
+            <div className="bottom">
+               <div className="feels">
+                  {/* {data?.main ? <p className='bold'>{data.main.feels_like.toFixed()}°F</p> : null} */}
+                  <p>Feels Like</p>
                </div>
+               <div className="humidity">
+                  {/* {data?.main ? <p className='bold'>{data.main.humidity}%</p> : null} */}
+                  <p>Humidity</p>
+               </div>
+               <div className="wind">
+                  {/* {data?.wind ? <p className='bold'>{data.wind.speed.toFixed()} MPH</p> : null} */}
+                  <p>Wind Speed</p>
+               </div>
+            </div>
          </div>
       </div>
    )

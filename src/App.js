@@ -1,33 +1,31 @@
 import React, { useEffect, useReducer, useState } from 'react';
-import { MapSection, InfoSection, SearchBar } from './components';
-import { INITIAL_LOAD } from './context/dispatchTypes';
-import State from './context/State';
-import StateContext from './context/stateContext';
-import stateReducer from './context/stateReducer';
+import { MapSection, InfoSection, NavBar } from './components';
+import { InitialState, reducer, dispatchTypes } from './context/State';
+import { GoogleMap, Marker, useLoadScript } from '@react-google-maps/api';
+import getCurrent from './helpers/getCurrent';
+import getInit from './helpers/getInit';
 
 function App() {
+	const [state, dispatch] = useReducer(reducer, InitialState);
 
-	const [state, dispatch] = useReducer(stateReducer, State);
-
-// useEffect(()=> {
-// 	dispatch({type: INITIAL_LOAD})
-// }, [state])
+	useEffect(() => {
+		getInit({ state, dispatch });
+	}, []);
 
 	return (
-		
-		<State>
-			<div className='app'>
-				<img src={state.data?.condition.icon}></img>
-				<SearchBar />
+		<div className='app'>
+			<NavBar state={state} dispatch={dispatch}>
+			</NavBar>
+<div className='pageWrapper'>
+			<InfoSection className='info' state={state} dispatch={dispatch} />
 
-				<InfoSection
-					className='info'
-
-					// setLocation={setLocation}
-				/>
-				<MapSection className='map'></MapSection>
-			</div>
-		</State>
+			{/* {!isLoaded ? (
+					<div>Loading...</div>
+				) : ( */}
+			<MapSection className='map' state={state} dispatch={dispatch}></MapSection>
+			{/* )} */}
+</div>
+		</div>
 	);
 }
 

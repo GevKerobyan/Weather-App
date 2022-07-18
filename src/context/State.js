@@ -1,24 +1,51 @@
-import React, { useReducer } from 'react';
-import StateContext from './stateContext';
-import stateReducer from './stateReducer';
+import axios from 'axios';
+import { createContext } from 'react';
 
-function State(props) {
-	const InitialState = {
-		system: 'metric',
-		currentCity: {
-         name: '',
-         coords: {
-            lat: '',
-            lng: '',
-         }
-      },
-		data: {},
-	};
+const BASE_URL = `http://api.weatherapi.com/v1`;
 
-	const [state, dispatch] = useReducer(stateReducer, State);
-	return (
-		<StateContext.Provider value={{state, dispatch}}>{props.children}</StateContext.Provider>
-	);
-}
+// ----- DEFAULT STATE ----- \\
+const InitialState = {
+	dataType: true,
+	location: {},
+	weatherData: {},
+};
 
-export default State;
+// ----- ACTION TYPES ----- \\
+const dispatchTypes = {
+	INITIAL_LOAD: 'INITIAL_LOAD',
+	CHANGE_LOCATION: 'SET_SEARCH_LOCATION',
+	CHANGE_SYSTEM: 'CHANGE_SYSTEM',
+};
+
+// ----- REDUCER ----- \\
+const reducer = (state, action) => {
+	const { type, payload } = action;
+
+	switch (type) {
+		case dispatchTypes.INITIAL_LOAD: {
+			// console.log('consoling: payload :::', payload )
+			return {
+				...state,
+				location: payload.location,
+				weatherData: payload.current,
+			};
+		}
+
+		case dispatchTypes.CHANGE_LOCATION: {
+			return {
+				...state,
+				location: payload.location,
+				weatherData: payload.current,
+			};
+		}
+
+		case dispatchTypes.CHANGE_SYSTEM: {
+			return {
+				...state,
+				dataType: !state.dataType,
+			};
+		}
+	}
+};
+
+export { InitialState, reducer, dispatchTypes };
