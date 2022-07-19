@@ -1,18 +1,15 @@
-import axios from "axios";
-import { useState, useEffect, useReducer, useContext } from "react";
+import './SearchBarStyles.css'
 import { svgs } from "../../assets/img/svgs";
-import { dispatchTypes, InitialState, reducer } from "../../context/State";
-import getCurrent from "../../helpers/getCurrent";
+import getWeather from "../../helpers/getWeather";
 
-function SearchBar({ state, dispatch }) {
+function SearchBar({ state, dispatch, tempSearchCity, setTempSearchCity }) {
 
 
-   const [tempSearchCity, setTempSearchCity] = useState('')
 
    // GET CURRENT 
 
    const callCurrent = () => {
-      getCurrent({ state, dispatch, place: tempSearchCity })
+      getWeather({ state, dispatch, place: tempSearchCity })
    }
 
    // useEffect(() => {

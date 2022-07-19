@@ -1,19 +1,17 @@
-import axios from 'axios';
-import { createContext } from 'react';
-
-const BASE_URL = `http://api.weatherapi.com/v1`;
-
 // ----- DEFAULT STATE ----- \\
 const InitialState = {
 	dataType: true,
-	location: {},
-	weatherData: {},
+	location: '',
+	weatherData: {
+		current: {},
+		forecast: {},
+	},
 };
 
 // ----- ACTION TYPES ----- \\
 const dispatchTypes = {
-	INITIAL_LOAD: 'INITIAL_LOAD',
-	CHANGE_LOCATION: 'SET_SEARCH_LOCATION',
+	SET_DATA: 'SET_DATA',
+	CHANGE_LOCATION: 'CHANGE_LOCATION',
 	CHANGE_SYSTEM: 'CHANGE_SYSTEM',
 };
 
@@ -22,20 +20,22 @@ const reducer = (state, action) => {
 	const { type, payload } = action;
 
 	switch (type) {
-		case dispatchTypes.INITIAL_LOAD: {
-			// console.log('consoling: payload :::', payload )
+		case dispatchTypes.SET_DATA: {
 			return {
 				...state,
 				location: payload.location,
-				weatherData: payload.current,
+				weatherData: {
+					...state.weatherData,
+					current: payload.current,
+					forecast: payload.forecast.forecastday[0],
+				},
 			};
 		}
 
 		case dispatchTypes.CHANGE_LOCATION: {
 			return {
 				...state,
-				location: payload.location,
-				weatherData: payload.current,
+				location: payload,
 			};
 		}
 
@@ -45,6 +45,7 @@ const reducer = (state, action) => {
 				dataType: !state.dataType,
 			};
 		}
+		default: console.log('wtf')
 	}
 };
 

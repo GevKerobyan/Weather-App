@@ -1,6 +1,6 @@
 
 import { useReducer } from "react";
-import { InitialState, reducer } from "../../context/State";
+import { InitialState, reducer } from "../../State/State";
 
 
 

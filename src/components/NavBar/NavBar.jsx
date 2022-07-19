@@ -1,5 +1,6 @@
 import { useState } from "react"
-import { dispatchTypes } from "../../context/State"
+import { fixDate, getWeather } from "../../helpers"
+import { dispatchTypes } from "../../State/State"
 import SearchBar from "../SearchBar/SearchBar"
 import './navBarStyles.css'
 
@@ -8,7 +9,41 @@ import './navBarStyles.css'
 
 const NavBar = ({ state, dispatch }) => {
 
+   const [tempSearchCity, setTempSearchCity] = useState('')
    const [menuFlag, setMenuFlag] = useState(false)
+   const [dayFlag, setDayFlag] = useState(false)
+
+   const navDateFormat = (input) => {
+      const monthArr = [
+         'Jan',
+         'Feb',
+         'Mar',
+         'Apr',
+         'May',
+         'June',
+         'July',
+         'Aug',
+         'Sept',
+         'Oct',
+         'Nov',
+         'Dec',
+      ];
+      let bub=[];
+      let firstBub, secondBub, res, result;
+      if(input) {
+         bub = input.split(' ')
+         secondBub=bub[1]
+         firstBub=bub[0]
+         res = firstBub.split('-')
+         res[1]=monthArr[parseInt(res[1])-1]
+         result = [res[2], res[1], res[0]].join(' ').concat(` - ${secondBub}`)
+         return result
+      }
+      return ''
+   
+   }
+
+   navDateFormat(state.location.localtime)
 
    return (
       <div
@@ -16,26 +51,24 @@ const NavBar = ({ state, dispatch }) => {
             position: 'fixed',
             zIndex: '9',
             display: 'flex',
-            width: '25%',
-            marginLeft: '50%',
-            transform: 'translateX(-25%)',
-            paddingRight: '5%',
+            width: '100%',
+            backgroundColor: 'linear-gradient(red, blue)',
+            // marginLeft: '6rem',
+            // paddingRight: '5%',
+            padding: '55px',
             height: '75px',
-            justifyContent: "space-between",
+            justifyContent: "center",
             alignItems: 'center',
+            gap:'150px',
             color: 'white'
          }}>
-         <SearchBar state={state} dispatch={dispatch} />
-         <div className="menu" onClick={() =>setMenuFlag(!menuFlag)}>Options</div>
+         <div className="dataTypeWrapper" onClick={() =>dispatch({type: dispatchTypes.CHANGE_SYSTEM})}>
+            <span>Data Type</span>
+            <span>{state.dataType ? 'Metric' : 'Imperial'}</span>
+         </div>
          
-         {menuFlag && <div className="openMenu">
-
-            <span>Data type</span>
-            <span>Get current</span>
-            <span>Get forecast</span>
-            
-
-         </div>}
+         <SearchBar state={state} dispatch={dispatch} tempSearchCity={tempSearchCity} setTempSearchCity={setTempSearchCity} />
+         <div className="navDate">{navDateFormat(state.location.localtime)}</div>
       </div>
    )
 }

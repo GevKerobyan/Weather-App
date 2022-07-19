@@ -1,0 +1,122 @@
+.infoContainer {
+   z-index: 5;
+   height: 90vh;
+   min-width: 400px;
+   border-radius: 25px;
+   overflow: hidden;
+   background-color: rgba(255, 255, 255, 0.2);
+   max-width: 650px;
+   height: 650px;
+   margin: 1rem auto;
+   padding: 0 1rem;
+   position: relative;
+   border-radius: 1.5rem;
+   display: flex;
+   flex-direction: column;
+   justify-content: space-between;
+}
+
+.infoContainer:before {
+   content: "";
+   background: url("../../assets/img/infoBG.jpg") no-repeat center/cover;
+   background-position: bottom 50px;
+   position: absolute;
+   width: 100%;
+   height: 100%;
+   top: 0;
+   left: 0;
+   z-index: -1;
+}
+
+.infoContainer::after {
+   content: "";
+   background-color: rgba(0, 0, 0, 0.1);
+   position: absolute;
+   width: 100%;
+   height: 100%;
+   top: 0;
+   left: 0;
+   z-index: -1;
+}
+
+.top {
+   width: 100%;
+   height: 100%;
+   margin: 1rem auto;
+}
+
+.location {
+   display: flex;
+   width: 100%;
+   justify-content: space-between;
+   align-items: center;
+}
+
+.weatherInfo {
+   height: 50%;
+   display: flex;
+   flex-direction: column;
+   gap: 10px;
+}
+
+.container {
+   width: 100%;
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+   padding: 0 5px;
+   font-size: 25px;
+}
+
+.containerBottomWrapper {
+   margin-top: 20px;
+   padding-top: 10px;
+   border-top: 1px dotted black;
+}
+
+.containerBottom {
+   width: 100%;
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+   padding: 0 5px;
+   font-size: 25px;
+}
+
+.bottom {
+   display: flex;
+   justify-content: space-evenly;
+   text-align: center;
+   width: 100%;
+   margin: 1rem auto;
+   padding: 1rem;
+   border-radius: 12px;
+   background-color: rgba(255, 255, 255, 0.5);
+   color: #040C18;
+   font-size: 20px;
+ }
+
+.bottomSection {
+   height: 100%;
+   display: flex;
+   /* flex-direction: column; */
+   align-items: center;
+   justify-content: center;
+}
+
+.bottomSection span{
+   display: flex;
+   justify-content: center;
+align-items: center;
+   font-size: 16px;
+}
+
+.bottomPic {
+   height: 30px;
+   width: 30px;
+}
+
+.bottomPic img {
+   height: 35px;
+   width: 35px;
+}

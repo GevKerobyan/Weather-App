@@ -1,9 +1,8 @@
-import React, { useEffect, useReducer, useState } from 'react';
+import React, { useEffect, useReducer } from 'react';
 import { MapSection, InfoSection, NavBar } from './components';
-import { InitialState, reducer, dispatchTypes } from './context/State';
-import { GoogleMap, Marker, useLoadScript } from '@react-google-maps/api';
-import getCurrent from './helpers/getCurrent';
+import { InitialState, reducer } from './State/State';
 import getInit from './helpers/getInit';
+import SecondPage from './components/SecondPage/SecondPage';
 
 function App() {
 	const [state, dispatch] = useReducer(reducer, InitialState);
@@ -12,19 +11,24 @@ function App() {
 		getInit({ state, dispatch });
 	}, []);
 
+	useEffect(() => {
+		console.log('consoling: state in app :::', state);
+	}, [state]);
 	return (
 		<div className='app'>
-			<NavBar state={state} dispatch={dispatch}>
-			</NavBar>
-<div className='pageWrapper'>
-			<InfoSection className='info' state={state} dispatch={dispatch} />
+			<NavBar state={state} dispatch={dispatch}></NavBar>
+			<div className='pageWrapper'>
+				<div className='firstPage'>
+					<InfoSection className='info' state={state} dispatch={dispatch} />
 
-			{/* {!isLoaded ? (
+					{/* {!isLoaded ? (
 					<div>Loading...</div>
 				) : ( */}
-			<MapSection className='map' state={state} dispatch={dispatch}></MapSection>
-			{/* )} */}
-</div>
+					<MapSection className='map' state={state} dispatch={dispatch}></MapSection>
+				</div>
+				{/* )} */}
+				<SecondPage state={state} dispatch={dispatch}/>
+			</div>
 		</div>
 	);
 }

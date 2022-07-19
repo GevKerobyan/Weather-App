@@ -1,11 +1,12 @@
 import axios from 'axios';
-import getCurrent from './getCurrent';
+import { dispatchTypes } from '../State/State';
+import getWeather from './getWeather';
 
 function getInit({ state, dispatch }) {
-   let place;
+	let place;
 	axios.get('https://ipapi.co/json').then((res) => {
-      place = res.data.city
-		getCurrent({state, dispatch, place});
+		place = res.data.city;
+		getWeather({ state, dispatch, place });
 	});
 }
 

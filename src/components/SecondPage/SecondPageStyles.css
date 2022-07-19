@@ -1,0 +1,71 @@
+
+.secondPage {
+   width: 100%;
+   color: #fff;
+   display: flex;
+   justify-content: space-between;
+   padding: 6rem;
+   gap: 25px;
+}
+
+.dailyTempGraph {
+   width: 80%;
+   min-height: 500px;
+   background-color: rgba(127, 255, 212, 0.1);
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
+
+.hourlyInfoContent {
+   background-color: rgba(0,0,0,0.2);
+   height: 80%;
+   width: 95%;
+   overflow-x: scroll;
+   display: flex;
+   justify-content: flex-start;
+   align-items: center;
+   padding: 10px;
+   border-radius: 5px;
+}
+
+.singleHourData {
+   width: 10%;
+   height: 100%;
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+   gap: 10px;
+}
+
+.singleHourTemp {
+   font-size: 15px;
+}
+
+.singleHourBar {
+   position: relative;
+   width: 6px;
+   background-color: rgba(255,255,255,0.7);
+   height: 90%;
+}
+
+.hourlyInfoContent::-webkit-scrollbar{
+   height: 8px;
+}
+
+.hourlyInfoContent::-webkit-scrollbar-thumb{
+   width: 4px;
+   height: 4px;
+   border-radius: 100vh;
+   background-color: crimson;
+}
+
+.singleHourTime{
+   font-size: 15px;
+}
+
+.dailyAstroStats {
+   width: 300px;
+   background-color: rgba(238, 130, 238, 0.2);
+}
