@@ -1,7 +1,10 @@
+import { useEffect } from 'react';
 import './SecondPageStyles.css'
 
 function SecondPage({ state, dispatch }) {
    const { location, weatherData } = state;
+
+
 
    return (
       <div className='secondPage'>
@@ -33,7 +36,9 @@ function SecondPage({ state, dispatch }) {
                   })}
                </div>
          </div>
-         <div className='dailyAstroStats'>dailyAstroStats</div>
+         <div className='dailyAstroStats'>dailyAstroStats
+         <img src={weatherData.forecast.day?.condition.icon}></img>
+         </div>
       </div>
    )
 }

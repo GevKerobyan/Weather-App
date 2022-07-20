@@ -17,7 +17,6 @@ const InfoSection = ({ state, dispatch }) => {
       moonset: checkAstro(weatherData.forecast.astro?.moonset),
       sunrise: checkAstro(weatherData.forecast.astro?.sunrise),
       sunset: checkAstro(weatherData.forecast.astro?.sunset),
-
    }
 
    return (

@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer } from 'react';
+import React, { useEffect, useReducer, useRef } from 'react';
 import { MapSection, InfoSection, NavBar } from './components';
 import { InitialState, reducer } from './State/State';
 import getInit from './helpers/getInit';
@@ -6,6 +6,8 @@ import SecondPage from './components/SecondPage/SecondPage';
 
 function App() {
 	const [state, dispatch] = useReducer(reducer, InitialState);
+
+	const secondPage = useRef();
 
 	useEffect(() => {
 		getInit({ state, dispatch });
@@ -21,13 +23,18 @@ function App() {
 				<div className='firstPage'>
 					<InfoSection className='info' state={state} dispatch={dispatch} />
 
-					{/* {!isLoaded ? (
-					<div>Loading...</div>
-				) : ( */}
-					<MapSection className='map' state={state} dispatch={dispatch}></MapSection>
+					<div className='mapContainer'>
+						{state.location ? (
+							<MapSection
+								className='map'
+								state={state}
+								dispatch={dispatch}
+							></MapSection>
+						) : 'Loading...'}
+					</div>
 				</div>
-				{/* )} */}
-				<SecondPage state={state} dispatch={dispatch}/>
+				<SecondPage state={state} dispatch={dispatch} />
+				<div ref={secondPage}></div>
 			</div>
 		</div>
 	);
