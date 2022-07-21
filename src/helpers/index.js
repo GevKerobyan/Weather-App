@@ -1,3 +1,5 @@
 export {default as getInit} from './getInit'
 export {default as getWeather} from './getWeather'
+export {default as getByCoords} from './getByCoords'
 export {default as fixDate} from './fixDate'
+// export {default as SearchSuggestions} from './SearchSuggestions'

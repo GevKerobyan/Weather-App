@@ -21,6 +21,7 @@ const reducer = (state, action) => {
 
 	switch (type) {
 		case dispatchTypes.SET_DATA: {
+			console.log(payload, 'payload')
 			return {
 				...state,
 				location: payload.location,

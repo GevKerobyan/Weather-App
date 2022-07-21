@@ -4,17 +4,11 @@ import getWeather from "../../helpers/getWeather";
 
 function SearchBar({ state, dispatch, tempSearchCity, setTempSearchCity }) {
 
-
-
    // GET CURRENT 
 
    const callCurrent = () => {
       getWeather({ state, dispatch, place: tempSearchCity })
    }
-
-   // useEffect(() => {
-   //    console.log('consoling: tempSearchCity :::', tempSearchCity)
-   // }, [tempSearchCity])
 
    return (
       <div className='search-input-wrapper'>

@@ -23,26 +23,31 @@ const InfoSection = ({ state, dispatch }) => {
       <div>
          <div className="infoContainer">
             <div className="top">
-               <div className="location">
-                  <h1>{location.name}</h1>
+               <div className="locationAndIcon">
+                  <div className="location">
+                     <h1>{location.name}</h1>
+                     <h5>{location.country}</h5>
+                  </div>
                   <img src={weatherData.current.condition?.icon}></img>
                </div>
                <div className="weatherInfo">
-                  <div className="temperature container">
-                     <span>Temperature</span>
-                     {state.dataType ?
-                        <h2>{weatherData.current.temp_c}{'\u00b0'} C</h2>
-                        : <h2>{weatherData.current.temp_f}{'\u00b0'} F</h2>
-                     }
+                  <div className='weatherInfo-top'>
+                     <div className="temperature container">
+                        <span>Temperature</span>
+                        {state.dataType ?
+                           <h2>{weatherData.current.temp_c}{'\u00b0'} C</h2>
+                           : <h2>{weatherData.current.temp_f}{'\u00b0'} F</h2>
+                        }
+                     </div>
+                     <div className="visibility container">
+                        <span>Visibility</span>
+                        {state.dataType ?
+                           <h3>{weatherData.current.vis_km} <span style={{ fontSize: '20px' }}>km</span></h3>
+                           : <h3>{weatherData.current.vis_miles}<span style={{ fontSize: '20px' }}>ml</span></h3>
+                        }
+                     </div>
                   </div>
-                  <div className="visibility container">
-                     <span>Visibility</span>
-                     {state.dataType ?
-                        <h3>{weatherData.current.vis_km} <span style={{ fontSize: '20px' }}>km</span></h3>
-                        : <h3>{weatherData.current.vis_miles}<span style={{ fontSize: '20px' }}>ml</span></h3>
-                     }
-                  </div>
-                  <div className='containerBottomWrapper'>
+                  <div className='weatherInfo-bottom'>
                      <div className="dailyMax containerBottom">
                         <span>Daily Max</span>
                         {state.dataType ?
@@ -69,17 +74,17 @@ const InfoSection = ({ state, dispatch }) => {
                   </div>
 
                </div>
-               
+
             </div>
 
             <div className="bottom">
-               <div className="moon bottomSection">
+            <span>{weatherData.current.condition?.text}</span>
+               {/* <div className="moon bottomSection">
                   <div className="moonData bottomData">
                      <span>{astroData.moonrise}</span>
                      <span>{astroData.moonset}</span>
                   </div>
-                  <div className="moonPic bottomPic">
-                  </div>
+                  <div className="moonPic bottomPic"></div>
                </div>
                <div className="sun bottomSection">
                   <div className="sunData bottomData">
@@ -90,7 +95,7 @@ const InfoSection = ({ state, dispatch }) => {
                </div>
                <div className="rain bottomSection">
                   <div className="rainData bottomData">
-                  <span>{weatherData.forecast.day?.daily_chance_of_rain}<span>%</span></span>
+                     <span>{weatherData.forecast.day?.daily_chance_of_rain}<span>%</span></span>
                   </div>
                   <div className="rainPic bottomPic">
                      <img src={rainPic} alt='rain'></img>
@@ -98,11 +103,11 @@ const InfoSection = ({ state, dispatch }) => {
                </div>
                <div className="snow bottomSection">
                   <div className="snowData bottomData">
-                  <span>{weatherData.forecast.day?.daily_chance_of_snow}<span>%</span></span>
+                     <span>{weatherData.forecast.day?.daily_chance_of_snow}<span>%</span></span>
 
                   </div>
                   <div className="snowPic bottomPic"></div>
-               </div>
+               </div> */}
             </div>
          </div>
       </div>
