@@ -3,12 +3,9 @@ import SearchBar from "../SearchBar/SearchBar"
 import { useState } from "react"
 import './navBarStyles.css'
 
-const NavBar = ({ state, dispatch }) => {
+const NavBar = ({ isLoaded, state, dispatch }) => {
 
    const [tempSearchCity, setTempSearchCity] = useState('')
-   const [menuFlag, setMenuFlag] = useState(false)
-   const [dayFlag, setDayFlag] = useState(false)
-
    const navDateFormat = (input) => {
       const monthArr = [
          'Jan',
@@ -49,7 +46,7 @@ const NavBar = ({ state, dispatch }) => {
          </div>
 
          <SearchBar
-            state={state} dispatch={dispatch} tempSearchCity={tempSearchCity} setTempSearchCity={setTempSearchCity}
+            isLoaded={isLoaded} state={state} dispatch={dispatch} tempSearchCity={tempSearchCity} setTempSearchCity={setTempSearchCity}
          />
          <div className="navDate">{navDateFormat(state.location.localtime)}</div>
       </div>

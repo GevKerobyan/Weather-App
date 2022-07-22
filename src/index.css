@@ -6,6 +6,10 @@
   padding: 0;
 }
 
+*:focus {
+  outline: none;
+}
+
 body {
   font-family: "Outfit", "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
     "Helvetica Neue", sans-serif;
@@ -19,7 +23,7 @@ h1 {
 }
 
 h2 {
-  font-size: 2.5rem
+  font-size: 2.5rem;
 }
 
 .app {
@@ -55,7 +59,7 @@ h2 {
 }
 
 .search-input-wrapper {
-   /* margin-left: 50%; 
+  /* margin-left: 50%; 
   transform: translateX(-50%)   */
 }
 
@@ -80,7 +84,8 @@ h2 {
   padding: 1rem;
   display: flex;
   align-items: center;
-justify-content: center;
+  justify-content: center;
+  cursor: pointer;
 }
 
 .search-btn svg {
@@ -109,12 +114,9 @@ justify-content: center;
   color: rgba(248, 248, 248, 0.6);
 }
 
-
-
 .app .description {
   position: relative;
   right: -90%;
   transform-origin: 0 0;
   transform: rotate(269deg);
 }
-

@@ -1,23 +1,7 @@
 import './InfoSectionStyles.css'
-import rainPic from '../../assets/weatherIcons/day/185.png'
-const InfoSection = ({ state, dispatch }) => {
+const InfoSection = ({ state }) => {
 
    const { location, weatherData } = state;
-   const tempBarColorSetter = (input) => {
-      return input * 4 / 100
-   }
-
-   const checkAstro = (input) => {
-      if (input?.split(' ')[0] !== 'No') return input
-      return 'N/A'
-   }
-
-   const astroData = {
-      moonrise: checkAstro(weatherData.forecast.astro?.moonrise),
-      moonset: checkAstro(weatherData.forecast.astro?.moonset),
-      sunrise: checkAstro(weatherData.forecast.astro?.sunrise),
-      sunset: checkAstro(weatherData.forecast.astro?.sunset),
-   }
 
    return (
       <div>
@@ -78,36 +62,7 @@ const InfoSection = ({ state, dispatch }) => {
             </div>
 
             <div className="bottom">
-            <span>{weatherData.current.condition?.text}</span>
-               {/* <div className="moon bottomSection">
-                  <div className="moonData bottomData">
-                     <span>{astroData.moonrise}</span>
-                     <span>{astroData.moonset}</span>
-                  </div>
-                  <div className="moonPic bottomPic"></div>
-               </div>
-               <div className="sun bottomSection">
-                  <div className="sunData bottomData">
-                     <span>{astroData.sunrise}</span>
-                     <span>{astroData.sunset}</span>
-                  </div>
-                  <div className="sunPic bottomPic"></div>
-               </div>
-               <div className="rain bottomSection">
-                  <div className="rainData bottomData">
-                     <span>{weatherData.forecast.day?.daily_chance_of_rain}<span>%</span></span>
-                  </div>
-                  <div className="rainPic bottomPic">
-                     <img src={rainPic} alt='rain'></img>
-                  </div>
-               </div>
-               <div className="snow bottomSection">
-                  <div className="snowData bottomData">
-                     <span>{weatherData.forecast.day?.daily_chance_of_snow}<span>%</span></span>
-
-                  </div>
-                  <div className="snowPic bottomPic"></div>
-               </div> */}
+               <span>{weatherData.current.condition?.text}</span>
             </div>
          </div>
       </div>

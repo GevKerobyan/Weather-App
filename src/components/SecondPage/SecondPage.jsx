@@ -1,9 +1,19 @@
-import { useEffect } from 'react';
 import './SecondPageStyles.css'
 
 function SecondPage({ state, dispatch }) {
    const { location, weatherData } = state;
 
+   const checkAstro = (input) => {
+      if (input?.split(' ')[0] !== 'No') return input
+      return 'N/A'
+   }
+
+   const astroData = {
+      moonrise: checkAstro(weatherData.forecast.astro?.moonrise),
+      moonset: checkAstro(weatherData.forecast.astro?.moonset),
+      sunrise: checkAstro(weatherData.forecast.astro?.sunrise),
+      sunset: checkAstro(weatherData.forecast.astro?.sunset),
+   }
 
 
    return (
@@ -11,7 +21,6 @@ function SecondPage({ state, dispatch }) {
          <div className='dailyTempGraph'>
                <div className="hourlyInfoContent">
                   {weatherData.forecast.hour?.map((item, index) => {
-
                      return (
                         <div className='singleHourData' key={index}>
                            <div className='singleHourTemp'>
@@ -44,3 +53,33 @@ function SecondPage({ state, dispatch }) {
 }
 
 export default SecondPage
+
+{/* <div className="moon bottomSection">
+                  <div className="moonData bottomData">
+                     <span>{astroData.moonrise}</span>
+                     <span>{astroData.moonset}</span>
+                  </div>
+                  <div className="moonPic bottomPic"></div>
+               </div>
+               <div className="sun bottomSection">
+                  <div className="sunData bottomData">
+                     <span>{astroData.sunrise}</span>
+                     <span>{astroData.sunset}</span>
+                  </div>
+                  <div className="sunPic bottomPic"></div>
+               </div>
+               <div className="rain bottomSection">
+                  <div className="rainData bottomData">
+                     <span>{weatherData.forecast.day?.daily_chance_of_rain}<span>%</span></span>
+                  </div>
+                  <div className="rainPic bottomPic">
+                     <img src={rainPic} alt='rain'></img>
+                  </div>
+               </div>
+               <div className="snow bottomSection">
+                  <div className="snowData bottomData">
+                     <span>{weatherData.forecast.day?.daily_chance_of_snow}<span>%</span></span>
+
+                  </div>
+                  <div className="snowPic bottomPic"></div>
+               </div> */}
