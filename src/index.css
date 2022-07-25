@@ -34,7 +34,7 @@ h2 {
   width: 100%;
   height: 200vh;
   position: relative;
-  background-color: rgba(0, 0, 0, 0.4);
+  background-color: rgba(0, 0, 0, 0.3);
   color: #fff;
 }
 
@@ -49,7 +49,6 @@ h2 {
 
 .app:before {
   content: "";
-  background: url("./assets/img/appBG.jpg") no-repeat center center/cover;
   position: absolute;
   width: 100%;
   height: 200vh;
@@ -58,9 +57,24 @@ h2 {
   z-index: -1;
 }
 
-.search-input-wrapper {
-  /* margin-left: 50%; 
-  transform: translateX(-50%)   */
+.sunnyApp:before {
+  background: url("./assets/BackGs/sunny/MainBg.jpg") no-repeat center/cover;
+}
+
+.cloudyApp:before {
+  background: url("./assets/BackGs/cloudy/MainBg.jpg") no-repeat center/cover;
+}
+
+.foggyApp:before {
+  background: url("./assets/BackGs/foggy/MainBg.jpg") no-repeat center/cover;
+}
+
+.rainyApp:before {
+  background: url("./assets/BackGs/rainy/MainBg.jpg") no-repeat center/cover;
+}
+
+.snowyApp:before {
+  background: url("./assets/BackGs/snowy/MainBg.jpg") no-repeat center/cover;
 }
 
 .search-input {

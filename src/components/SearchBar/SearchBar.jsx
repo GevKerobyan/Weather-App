@@ -1,5 +1,5 @@
 import './SearchBarStyles.css'
-import { svgs } from "../../assets/img/svgs";
+import { svgs } from "../../assets/svgs";
 import getWeather from "../../helpers/getWeather";
 import { Autocomplete } from '@react-google-maps/api';
 

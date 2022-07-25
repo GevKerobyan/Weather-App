@@ -29,7 +29,7 @@ const NavBar = ({ isLoaded, state, dispatch }) => {
          firstBub = bub[0]
          res = firstBub.split('-')
          res[1] = monthArr[parseInt(res[1]) - 1]
-         result = [res[2], res[1], res[0]].join(' ').concat(` - ${secondBub}`)
+         result = [res[2], res[1], res[0]].join(' ').concat(` / ${secondBub}`)
          return result
       }
       return ''

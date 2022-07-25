@@ -16,6 +16,8 @@ function App() {
 		libraries,
 	});
 
+
+
 	const secondPage = useRef();
 
 	useEffect(() => {
@@ -26,7 +28,7 @@ function App() {
 		console.log('consoling: state in app :::', state);
 	}, [state]);
 	return (
-		<div className='app'>
+		<div className={`app ${state.weatherData.currentCondition}App`}>
 			<NavBar isLoaded={isLoaded} state={state} dispatch={dispatch}></NavBar>
 			<div className='pageWrapper'>
 				<div className='firstPage'>

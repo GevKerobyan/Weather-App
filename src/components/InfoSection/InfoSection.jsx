@@ -5,7 +5,7 @@ const InfoSection = ({ state }) => {
 
    return (
       <div>
-         <div className="infoContainer">
+         <div className={`infoContainer ${weatherData.currentCondition}`}>
             <div className="top">
                <div className="locationAndIcon">
                   <div className="location">

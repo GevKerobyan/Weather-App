@@ -3,6 +3,7 @@ import { GoogleMap, useJsApiLoader } from '@react-google-maps/api'
 import getWeather from '../../helpers/getWeather'
 import './MapSectionStyles.css'
 import userHome from '../../assets/img/Location-user-01.svg'
+import getInit from '../../helpers/getInit'
 
 const MapSection = ({ isLoaded, state, dispatch }) => {
 
@@ -22,32 +23,32 @@ const MapSection = ({ isLoaded, state, dispatch }) => {
     mapRef.current = map
   }, [])
 
-
   return (
     <div className="mapWrapper">
-       <button 
-			style={{
-				position: 'absolute',
-				zIndex: '10000',
-				right: '50px',
-				top: '25px',
-				borderRadius: '100%',
-				border: 'none',
-				backgroundColor: 'rgba(100,100,100,0.6)',
-				padding: '10px',
-				boxSizing: 'border-box',
-			}}>
-			<img
-				style={{
-					width: '40px',
-					height: '40px',
-					borderRadius: '20px',
-					cursor: 'pointer',
-				}}
-				src={userHome}
-				alt='home image'
-			/>
-		</button>
+      <button
+        style={{
+          position: 'absolute',
+          zIndex: '10000',
+          right: '50px',
+          top: '25px',
+          borderRadius: '100%',
+          border: 'none',
+          backgroundColor: 'rgba(100,100,100,0.6)',
+          padding: '10px',
+          boxSizing: 'border-box',
+          cursor: 'pointer',
+        }}
+        onClick={()=>getInit({ state, dispatch })}>
+        <img
+          style={{
+            width: '30px',
+            height: '30px',
+            borderRadius: '20px',
+          }}
+          src={userHome}
+          alt='home image'
+        />
+      </button>
       {isLoaded ?
         <GoogleMap options={{ mapTypeControl: false, streetViewControl: false, fullscreenControl: false }} className="mapWrapper" mapContainerStyle={{
           width: '100%',

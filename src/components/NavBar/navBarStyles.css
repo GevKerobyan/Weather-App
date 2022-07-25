@@ -3,7 +3,7 @@
    z-index: 9;
    display: flex;
    width: 100%;
-   background: linear-gradient(to right, rgba(255,255,204,0.1), rgba(255,255,204,0.5));
+   /* background: linear-gradient(to right, rgba(255,255,204,0.1), rgba(255,255,204,0.5)); */
    /* padding: 55px; */
    height: 75px;
    justify-content: center;
