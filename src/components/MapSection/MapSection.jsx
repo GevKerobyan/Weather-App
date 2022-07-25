@@ -14,7 +14,6 @@ const MapSection = ({ isLoaded, state, dispatch }) => {
 
   const setClickedCoords = useCallback(e => {
     let place = `${e.latLng.lat().toFixed(2)},${e.latLng.lng().toFixed(2)}`
-    console.log(place)
     getWeather({ state, dispatch, place })
   }, [])
 

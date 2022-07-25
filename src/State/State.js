@@ -38,7 +38,6 @@ const reducer = (state, action) => {
 		return weatherCodes[item].includes(code);
 	});
 
-	console.log(payload, 'payload');
 	switch (type) {
 		case dispatchTypes.SET_DATA: {
 			
@@ -69,7 +68,7 @@ const reducer = (state, action) => {
 			};
 		}
 		default:
-			console.log('wtf');
+			console.log("don't have any");
 	}
 };
 

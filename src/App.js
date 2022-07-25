@@ -24,9 +24,6 @@ function App() {
 		getInit({ state, dispatch });
 	}, []);
 
-	useEffect(() => {
-		console.log('consoling: state in app :::', state);
-	}, [state]);
 	return (
 		<div className={`app ${state.weatherData.currentCondition}App`}>
 			<NavBar isLoaded={isLoaded} state={state} dispatch={dispatch}></NavBar>
