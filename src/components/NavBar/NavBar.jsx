@@ -42,7 +42,7 @@ const NavBar = ({ isLoaded, state, dispatch }) => {
       <div className="nav-bar-wrapper">
          <div className="dataTypeWrapper" onClick={() => dispatch({ type: dispatchTypes.CHANGE_SYSTEM })}>
             <span>Data Type</span>
-            <span>{state.dataType ? 'Metric' : 'Imperial'}</span>
+            <span className="dataTypeValue">{state.dataType ? 'Metric' : 'Imperial'}</span>
          </div>
 
          <SearchBar

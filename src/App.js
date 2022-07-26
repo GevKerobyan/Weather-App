@@ -7,16 +7,15 @@ import getInit from './helpers/getInit';
 import SecondPage from './components/SecondPage/SecondPage';
 
 const libraries = ['places']
+console.log('consoling: libraries :::', libraries )
 
 function App() {
 	const [state, dispatch] = useReducer(reducer, InitialState);
 
 	const { isLoaded } = useJsApiLoader({
-		googleMapsApiKey: 'AIzaSyCFppXDLIH45Wt4_1ZD4gRJPxQS5_pSTx0',
+		googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAP_API_KEY,
 		libraries,
 	});
-
-
 
 	const secondPage = useRef();
 

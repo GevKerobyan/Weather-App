@@ -1,5 +1,5 @@
-import { useCallback, useRef } from 'react'
-import { GoogleMap, useJsApiLoader } from '@react-google-maps/api'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import { GoogleMap, Marker, InfoWindow } from '@react-google-maps/api'
 import getWeather from '../../helpers/getWeather'
 import './MapSectionStyles.css'
 import userHome from '../../assets/img/Location-user-01.svg'
@@ -7,12 +7,25 @@ import getInit from '../../helpers/getInit'
 
 const MapSection = ({ isLoaded, state, dispatch }) => {
 
-  const center = {
+  const center = useMemo(() => ({
     lat: state.location.lat,
     lng: state.location.lon,
+  }), [state.location])
+
+  const options = {
+    mapTypeControl: false,
+    streetViewControl: false,
+    fullscreenControl: false,
+    clickableIcons: false,
+    gestureHandling: 'greedy',
+    maxZoom: 12,
+    minZoom: 4
   }
 
+  const [infoWindowOpen, setInfoWindowOpen] = useState(null)
+
   const setClickedCoords = useCallback(e => {
+    setInfoWindowOpen(false)
     let place = `${e.latLng.lat().toFixed(2)},${e.latLng.lng().toFixed(2)}`
     getWeather({ state, dispatch, place })
   }, [])
@@ -24,20 +37,12 @@ const MapSection = ({ isLoaded, state, dispatch }) => {
 
   return (
     <div className="mapWrapper">
-      <button
-        style={{
-          position: 'absolute',
-          zIndex: '10000',
-          right: '50px',
-          top: '25px',
-          borderRadius: '100%',
-          border: 'none',
-          backgroundColor: 'rgba(100,100,100,0.6)',
-          padding: '10px',
-          boxSizing: 'border-box',
-          cursor: 'pointer',
-        }}
-        onClick={()=>getInit({ state, dispatch })}>
+      <button className='homeBtn'
+        onClick={() => {
+          setInfoWindowOpen(false)
+          getInit({ state, dispatch })
+        }}>
+
         <img
           style={{
             width: '30px',
@@ -49,10 +54,39 @@ const MapSection = ({ isLoaded, state, dispatch }) => {
         />
       </button>
       {isLoaded ?
-        <GoogleMap options={{ mapTypeControl: false, streetViewControl: false, fullscreenControl: false }} className="mapWrapper" mapContainerStyle={{
+        <GoogleMap options={options} zoom={9} className="mapWrapper" mapContainerStyle={{
           width: '100%',
           height: '100%'
-        }} zoom={10} center={center} onClick={setClickedCoords} onLoad={onMapLoad} /> : <h1>Loading map...</h1>}
+        }}
+          onCenterChanged={() => {
+            setInfoWindowOpen(false)
+          }}
+          center={center}
+          onDblClick={setClickedCoords}
+          onLoad={onMapLoad} >
+          <Marker
+            position={center}
+            onClick={(e) => {
+              console.log('consoling: e.target :::', e)
+              setInfoWindowOpen(!infoWindowOpen)
+            }
+            }
+          >
+            {infoWindowOpen ?
+              <InfoWindow
+                position={center}
+                onCloseClick={() => setInfoWindowOpen(!infoWindowOpen)}>
+                <div className='infoWindowContainer'>
+                  <h3 className='infoWindowLocation'>{state.location.name}</h3>
+                  {state.dataType ?
+                    <h2>{state.weatherData.current.temp_c}{'\u00b0'} C</h2>
+                    : <h2>{state.weatherData.current.temp_f}{'\u00b0'} F</h2>
+                  }
+                </div>
+              </InfoWindow> : null}
+          </Marker>
+        </GoogleMap>
+        : <h1>Loading map...</h1>}
     </div>
   )
 }

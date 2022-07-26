@@ -77,37 +77,6 @@ h2 {
   background: url("./assets/BackGs/snowy/MainBg.jpg") no-repeat center/cover;
 }
 
-.search-input {
-  position: relative;
-  display: flex;
-  align-items: center;
-  padding: 1rem;
-  z-index: 9999;
-}
-
-.search-btn {
-  position: absolute;
-  right: -5px;
-  top: 0;
-  height: 45px;
-  width: 45px;
-  background-color: rgba(255, 255, 255, 0.2);
-  border-radius: 50%;
-  transform: translateX(-50%);
-  top: 1rem;
-  padding: 1rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-}
-
-.search-btn svg {
-  width: 40px;
-  height: 40px;
-  fill: white;
-}
-
 .systemChange {
   position: absolute;
   top: 50px;
