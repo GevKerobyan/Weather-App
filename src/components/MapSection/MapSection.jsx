@@ -1,7 +1,7 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import { useCallback, useMemo, useRef, useState } from 'react'
 import { GoogleMap, Marker, InfoWindow } from '@react-google-maps/api'
-import getWeather from '../../helpers/getWeather'
 import './MapSectionStyles.css'
+import getWeather from '../../helpers/getWeather'
 import userHome from '../../assets/img/Location-user-01.svg'
 import getInit from '../../helpers/getInit'
 
@@ -22,11 +22,11 @@ const MapSection = ({ isLoaded, state, dispatch }) => {
     minZoom: 4
   }
 
-  const [infoWindowOpen, setInfoWindowOpen] = useState(null)
+  const [infoWindowOpen, setInfoWindowOpen] = useState(false)
 
   const setClickedCoords = useCallback(e => {
-    setInfoWindowOpen(false)
-    let place = `${e.latLng.lat().toFixed(2)},${e.latLng.lng().toFixed(2)}`
+    setInfoWindowOpen(true)
+    let place = `${e.latLng.lat()},${e.latLng.lng()}`
     getWeather({ state, dispatch, place })
   }, [])
 
@@ -39,7 +39,7 @@ const MapSection = ({ isLoaded, state, dispatch }) => {
     <div className="mapWrapper">
       <button className='homeBtn'
         onClick={() => {
-          setInfoWindowOpen(false)
+          setInfoWindowOpen(true)
           getInit({ state, dispatch })
         }}>
 
@@ -59,32 +59,33 @@ const MapSection = ({ isLoaded, state, dispatch }) => {
           height: '100%'
         }}
           onCenterChanged={() => {
-            setInfoWindowOpen(false)
+            setInfoWindowOpen(true)
           }}
           center={center}
-          onDblClick={setClickedCoords}
+          onClick={setClickedCoords}
+          onDblClick={null}
           onLoad={onMapLoad} >
           <Marker
             position={center}
             onClick={(e) => {
-              console.log('consoling: e.target :::', e)
               setInfoWindowOpen(!infoWindowOpen)
             }
             }
           >
-            {infoWindowOpen ?
-              <InfoWindow
-                position={center}
-                onCloseClick={() => setInfoWindowOpen(!infoWindowOpen)}>
-                <div className='infoWindowContainer'>
-                  <h3 className='infoWindowLocation'>{state.location.name}</h3>
-                  {state.dataType ?
-                    <h2>{state.weatherData.current.temp_c}{'\u00b0'} C</h2>
-                    : <h2>{state.weatherData.current.temp_f}{'\u00b0'} F</h2>
-                  }
-                </div>
-              </InfoWindow> : null}
           </Marker>
+          {infoWindowOpen ?
+            <InfoWindow
+              options={{ pixelOffset: new window.google.maps.Size(0, -45) }}
+              position={center}
+              onCloseClick={() => setInfoWindowOpen(false)}>
+              <div className='infoWindowContainer'>
+                <span className='infoWindowLocation'>{state.location.name}</span>
+                {state.dataType ?
+                  <span className='infoWindowData'>{state.weatherData.current.temp_c}{'\u00b0'} C</span>
+                  : <span className='infoWindowData'>{state.weatherData.current.temp_f}{'\u00b0'} F</span>
+                }
+              </div>
+            </InfoWindow> : null}
         </GoogleMap>
         : <h1>Loading map...</h1>}
     </div>

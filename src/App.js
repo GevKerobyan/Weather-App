@@ -7,7 +7,6 @@ import getInit from './helpers/getInit';
 import SecondPage from './components/SecondPage/SecondPage';
 
 const libraries = ['places']
-console.log('consoling: libraries :::', libraries )
 
 function App() {
 	const [state, dispatch] = useReducer(reducer, InitialState);
@@ -33,7 +32,6 @@ function App() {
 						className='info'
 						state={state}
 					/>
-
 					<div className='mapContainer'>
 						{state.location ? (
 							<MapSection

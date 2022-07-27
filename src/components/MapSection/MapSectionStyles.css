@@ -35,17 +35,22 @@
  }
 
 .infoWindowContainer{
-   min-width: 100px;
+   min-width: 50px;
    width: auto;
-   height: 75px;
+   height: 40px;
    display: flex;
    flex-direction: column;
    align-items: flex-start;
    justify-content: space-between;
-   padding: 5px;
    color: #3d3d3d;
-
 }
 
 .infoWindowLocation {
+   font-size: 15px;
+   font-weight: bold;
+}
+
+.infoWindowData {
+   font-size: 18px;
+   font-weight: bold;
 }
