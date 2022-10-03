@@ -1,9 +1,8 @@
+import './MapSectionStyles.css'
 import { useCallback, useMemo, useRef, useState } from 'react'
 import { GoogleMap, Marker, InfoWindow } from '@react-google-maps/api'
-import './MapSectionStyles.css'
-import getWeather from '../../helpers/getWeather'
+import {getInit, getWeather} from '../../helpers'
 import userHome from '../../assets/img/Location-user-01.svg'
-import getInit from '../../helpers/getInit'
 
 const MapSection = ({ isLoaded, state, dispatch }) => {
 
@@ -36,8 +35,8 @@ const MapSection = ({ isLoaded, state, dispatch }) => {
   }, [])
 
   return (
-    <div className="mapWrapper">
-      <button className='homeBtn'
+    <div className="map-wrapper">
+      <button className='home-btn'
         onClick={() => {
           setInfoWindowOpen(true)
           getInit({ state, dispatch })
@@ -54,7 +53,7 @@ const MapSection = ({ isLoaded, state, dispatch }) => {
         />
       </button>
       {isLoaded ?
-        <GoogleMap options={options} zoom={9} className="mapWrapper" mapContainerStyle={{
+        <GoogleMap options={options} zoom={9} className="map-wrapper" mapContainerStyle={{
           width: '100%',
           height: '100%'
         }}
@@ -67,7 +66,7 @@ const MapSection = ({ isLoaded, state, dispatch }) => {
           onLoad={onMapLoad} >
           <Marker
             position={center}
-            onClick={(e) => {
+            onClick={() => {
               setInfoWindowOpen(!infoWindowOpen)
             }
             }
@@ -78,11 +77,11 @@ const MapSection = ({ isLoaded, state, dispatch }) => {
               options={{ pixelOffset: new window.google.maps.Size(0, -45) }}
               position={center}
               onCloseClick={() => setInfoWindowOpen(false)}>
-              <div className='infoWindowContainer'>
-                <span className='infoWindowLocation'>{state.location.name}</span>
+              <div className='info-window-container'>
+                <span className='info-window-location'>{state.location.name}</span>
                 {state.dataType ?
-                  <span className='infoWindowData'>{state.weatherData.current.temp_c}{'\u00b0'} C</span>
-                  : <span className='infoWindowData'>{state.weatherData.current.temp_f}{'\u00b0'} F</span>
+                  <span className='info-window-data'>{state.weatherData.current.temp_c}{'\u00b0'} C</span>
+                  : <span className='info-window-data'>{state.weatherData.current.temp_f}{'\u00b0'} F</span>
                 }
               </div>
             </InfoWindow> : null}

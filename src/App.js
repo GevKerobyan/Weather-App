@@ -1,12 +1,10 @@
 import React, { useEffect, useReducer, useRef } from 'react';
-import '@reach/combobox/styles.css';
 import { useJsApiLoader } from '@react-google-maps/api';
-import { MapSection, InfoSection, NavBar } from './components';
+import { MapSection, InfoSection, NavBar, SecondPage } from './components';
 import { InitialState, reducer } from './State/State';
-import getInit from './helpers/getInit';
-import SecondPage from './components/SecondPage/SecondPage';
+import {getInit} from './helpers';
 
-const libraries = ['places']
+const libraries = ['places'];
 
 function App() {
 	const [state, dispatch] = useReducer(reducer, InitialState);
@@ -25,21 +23,17 @@ function App() {
 	return (
 		<div className={`app ${state.weatherData.currentCondition}App`}>
 			<NavBar isLoaded={isLoaded} state={state} dispatch={dispatch}></NavBar>
-			<div className='pageWrapper'>
-				<div className='firstPage'>
-					<InfoSection
-						id='scrollCheck'
-						className='info'
-						state={state}
-					/>
-					<div className='mapContainer'>
+			<div className='page-wrapper'>
+				<div className='first-page'>
+					<InfoSection id='scrollCheck' className='info' state={state} />
+					<div className='map-container'>
 						{state.location ? (
 							<MapSection
 								className='map'
 								isLoaded={isLoaded}
 								state={state}
 								dispatch={dispatch}
-							></MapSection>
+							/>
 						) : (
 							'Loading...'
 						)}

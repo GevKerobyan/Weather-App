@@ -1,0 +1,3 @@
+window.env = {
+  "GOOGLE_MAP_API_KEY": "AIzaSyCFppXDLIH45Wt4_1ZD4gRJPxQS5_pSTx0"
+};

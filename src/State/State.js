@@ -39,9 +39,8 @@ const reducer = (state, action) => {
 	});
 
 	switch (type) {
+		
 		case dispatchTypes.SET_DATA: {
-			
-
 			return {
 				...state,
 				location: payload.location,
@@ -73,3 +72,4 @@ const reducer = (state, action) => {
 };
 
 export { InitialState, reducer, dispatchTypes };
+

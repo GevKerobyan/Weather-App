@@ -7,7 +7,7 @@ function getInit({ state, dispatch }) {
 	axios.get('https://ipapi.co/json').then((result) => {
 		axios
 			.get(
-				`${process.env.REACT_APP_API_BASE_URL}/ip.json?key=c1d1c10cbda24036a2372844221407&q=${result.data.ip}`
+				`${process.env.REACT_APP_API_BASE_URL}/ip.json?key=${process.env.REACT_APP_API_KEY}&q=${result.data.ip}`
 			)
 			.then((res) => {
 				place = res.data.city;

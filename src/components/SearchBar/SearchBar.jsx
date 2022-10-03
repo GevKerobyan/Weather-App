@@ -1,16 +1,10 @@
 import './SearchBarStyles.css'
-import { svgs } from "../../assets/svgs";
-import getWeather from "../../helpers/getWeather";
-// import { Autocomplete } from '@react-google-maps/api';
-import PlacesAutocomplete, {
-   geocodeByAddress,
-   geocodeByPlaceId,
-   getLatLng,
-} from 'react-places-autocomplete';
+import { svgs } from '../../assets/svgs';
+import getWeather from '../../helpers/getWeather';
+import PlacesAutocomplete from 'react-places-autocomplete';
 
 function SearchBar({ isLoaded, state, dispatch, tempSearchCity, setTempSearchCity }) {
 
-   // GET CURRENT 
    const callCurrent = e => {
       getWeather({ state, dispatch, place: e })
       setTempSearchCity('')
@@ -28,18 +22,18 @@ function SearchBar({ isLoaded, state, dispatch, tempSearchCity, setTempSearchCit
                onSelect={e => callCurrent(e)}
             >
                {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
-                  <div className='inputContainer'>
+                  <div>
                      <input className='input'
                         {...getInputProps({
                            placeholder: `${tempSearchCity || 'please choose a city'}`,
                         })}
                      />
-                     <div className='searchDropDownContainer'>
+                     <div className='search-dropdown-container'>
                         {loading ? <div>...loading</div> : null}
 
                         {suggestions.map((suggestion, index) => {
                            const style = { backgroundColor: suggestion.active ? 'rgba(32,73,105,1)' : 'rgba(218,218,218,1)', color: suggestion.active ? 'rgba(218,218,218,1)' : 'rgba(32,73,105,1)', width: '100%', cursor: 'pointer', padding: '6px 10px' }
-                           return <div key={index} className='searchSuggestionContainer'{...getSuggestionItemProps(suggestion, { style })}>{suggestion.description}</div>
+                           return <div key={index} {...getSuggestionItemProps(suggestion, { style })}>{suggestion.description}</div>
                         })}
                      </div>
                   </div>

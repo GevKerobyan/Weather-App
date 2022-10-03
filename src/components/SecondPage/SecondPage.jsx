@@ -1,12 +1,8 @@
 import './SecondPageStyles.css'
-import Sun from '../../assets/AstroIcons/Sun.png'
-import Moon from '../../assets/AstroIcons/Moon.png'
-import Rain from '../../assets/AstroIcons/Rain.png'
-import Snow from '../../assets/AstroIcons/Snow.png'
+import { Moon, Sun, Rain, Snow } from '../../assets/AstroIcons'
 
-
-function SecondPage({ state, dispatch }) {
-   const { location, weatherData } = state;
+function SecondPage({ state }) {
+   const { weatherData } = state;
 
    const checkAstro = (input) => {
       if (input?.split(' ')[0] !== 'No') return input
@@ -21,75 +17,74 @@ function SecondPage({ state, dispatch }) {
    }
 
    return (
-      <div className='secondPage'>
-         <div className='dailyTempGraph'>
-            <div className="hourlyInfoContent">
+      <div className='secondpage'>
+         <div className='daily-temp-graph'>
+            <div className='hourly-info-content'>
                {weatherData.forecast.hour?.map((item, index) => {
                   return (
-                     <div className='singleHourData' key={index}>
-                        <div className='singleHourTemp'>
+                     <div className='single-hour-data' key={index}>
+                        <div className='single-hour-temp'>
                            {state.dataType ? item.temp_c : item.temp_f}
                         </div>
-                        <div className='singleHourBar'>
-                           <div className='singleHourActualBar'
+                        <div className='single-hour-bar'>
+                           <div
                               style={{
                                  position: 'absolute',
                                  bottom: '0',
                                  left: '0',
                                  width: '6px',
-                                 // backgroundColor: `blue`,
                                  background: 'linear-gradient( blue, lightblue)',
                                  height: `${item.temp_c * 2}%`
                               }}>
                            </div>
                         </div>
-                        <div className='singleHourTime'>{`${index}:0`}</div>
+                        <div className='single-hour-time'>{`${index}:0`}</div>
                      </div>
                   )
                })}
             </div>
          </div>
 
-         <div className='dailyAstroStats'>
+         <div className='daily-astro-stats'>
 
-            <div className="moonData astroData">
-               <div className="moonPic astroPic">
+            <div className='astro-data'>
+               <div className='astro-pic'>
                   <img src={Moon} alt='moon'></img>
                </div>
-               <div className='riseAndSet'>
+               <div className='rise-and-set'>
                   <span>rise</span>
                   <span>set</span>
                </div>
-               <div className='riseAndSet'>
+               <div className='rise-and-set'>
                   <span>{astroData.moonrise}</span>
                   <span>{astroData.moonset}</span>
                </div>
             </div>
             
-            <div className="sunData astroData">
-               <div className="sunPic astroPic">
+            <div className='astro-data'>
+               <div className='astro-pic'>
                   <img src={Sun} alt='sun'></img>
                </div>
-               <div className='riseAndSet'>
+               <div className='rise-and-set'>
                   <span>rise</span>
                   <span>set</span>
                </div>
-               <div className='riseAndSet'>
+               <div className='rise-and-set'>
                   <span>{astroData.sunrise}</span>
                   <span>{astroData.sunset}</span>
                </div>
             </div>
           
-            <div className="rainData astroData">
-               <div className="rainPic astroPic">
+            <div className='astro-data'>
+               <div className='astro-pic'>
                   <img src={Rain} alt='rain'></img>
                </div>
                <div>chance</div>
                <span>{weatherData.forecast.day?.daily_chance_of_rain}<span>%</span></span>
             </div>
             
-            <div className="snowData astroData">
-               <div className="snowPic astroPic">
+            <div className='astro-data'>
+               <div className='astro-pic'>
                   <img src={Snow} alt='snow'></img>
                </div>
                <div>chance</div>
